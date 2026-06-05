@@ -117,15 +117,18 @@ function resolveSecretReferences(
 ): { success: true; content: string } | { success: false; errors: string[] } {
   const missingKeys = new Set<string>();
 
-  const resolved = content.replace(SECRET_REF_PATTERN, (_match, key: string) => {
-    const secretValue = secrets[key];
-    if (secretValue === undefined) {
-      missingKeys.add(key);
-      return _match;
-    }
+  const resolved = content.replace(
+    SECRET_REF_PATTERN,
+    (_match, key: string) => {
+      const secretValue = secrets[key];
+      if (secretValue === undefined) {
+        missingKeys.add(key);
+        return _match;
+      }
 
-    return JSON.stringify(secretValue);
-  });
+      return JSON.stringify(secretValue);
+    },
+  );
 
   if (missingKeys.size > 0) {
     const projectDir = path.dirname(filePath);
@@ -133,9 +136,7 @@ function resolveSecretReferences(
     const keys = Array.from(missingKeys).sort();
     return {
       success: false,
-      errors: [
-        `Missing secret key(s) in ${secretFile}: ${keys.join(", ")}`,
-      ],
+      errors: [`Missing secret key(s) in ${secretFile}: ${keys.join(", ")}`],
     };
   }
 
@@ -145,7 +146,9 @@ function resolveSecretReferences(
 async function parseFileData(
   filePath: string,
   secrets?: SecretsMap,
-): Promise<{ success: true; data: unknown } | { success: false; errors: string[] }> {
+): Promise<
+  { success: true; data: unknown } | { success: false; errors: string[] }
+> {
   const ext = path.extname(filePath).toLowerCase();
 
   let content: string;
@@ -163,7 +166,11 @@ async function parseFileData(
   let data: unknown;
   try {
     if (ext === ".yaml" || ext === ".yml") {
-      const secretResult = resolveSecretReferences(content, filePath, secrets ?? {});
+      const secretResult = resolveSecretReferences(
+        content,
+        filePath,
+        secrets ?? {},
+      );
       if (!secretResult.success) {
         return { success: false, errors: secretResult.errors };
       }
@@ -173,7 +180,11 @@ async function parseFileData(
       data = JSON.parse(content);
     } else {
       try {
-        const secretResult = resolveSecretReferences(content, filePath, secrets ?? {});
+        const secretResult = resolveSecretReferences(
+          content,
+          filePath,
+          secrets ?? {},
+        );
         if (!secretResult.success) {
           return { success: false, errors: secretResult.errors };
         }
