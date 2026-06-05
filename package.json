@@ -1,0 +1,38 @@
+{
+  "name": "companion-config-compiler",
+  "version": "0.1.0",
+  "description": "Compile human-friendly YAML/JSON configs into Bitfocus Companion configuration JSON",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ccc": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "node dist/cli.js",
+    "test": "vitest",
+    "lint": "eslint src/**/*.ts"
+  },
+  "keywords": [
+    "bitfocus",
+    "companion",
+    "home-assistant",
+    "stream-deck",
+    "config"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "yaml": "^2.4.0",
+    "zod": "^3.22.0",
+    "nanoid": "^5.0.0",
+    "sharp": "^0.33.0",
+    "commander": "^12.0.0"
+  }
+}

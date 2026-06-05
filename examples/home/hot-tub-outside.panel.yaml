@@ -1,0 +1,71 @@
+# Satellite1 Panel Configuration
+# Stream Deck Mini (3x2) - Converted from companionconfig
+version: 1
+name: hot_tub_outside
+
+surface:
+  id: streamdeck:A00DA5421KTHB1
+  name: Hot Tub Outside
+  brightness: 100
+  rotation: surface-90
+
+panel:
+  start: hot_tub_main
+  gridSize:
+    rows: 3
+    columns: 2
+  pages:
+    # Page 1: Hot Tub Main
+    hot_tub_main:
+      1:
+        type: toggle_entity
+        entity: switch.deck_lights_duel_outlet_plug_2
+        icon: light.png
+      2:
+        type: toggle_entity
+        entity: switch.outside_lights
+        icon: outdoor_lights.png
+      3:
+        type: toggle_entity
+        entity: light.mbp501ux_light
+        icon: lightbulb.png
+      4:
+        type: nav
+        goto: hot_tub_pumps
+        label: Pumps\n▶
+      5:
+        type: empty
+      6:
+        type: empty
+
+    # Page 2: Hot Tub Pumps
+    hot_tub_pumps:
+      1:
+        type: toggle_entity
+        entity: switch.hot_tub_pump_1
+        icon: pump-up.png
+        label: Pump 1
+        labelSize: 14
+        labelAlignment: center:bottom
+      2:
+        type: toggle_entity
+        entity: switch.hot_tub_pump_2
+        icon: pump-up.png
+        label: Pump 2
+        labelSize: 14
+        labelAlignment: center:bottom
+      3:
+        type: toggle_entity
+        entity: switch.hot_tub_pump_3
+        icon: pump-up.png
+        label: Pump 3
+        labelSize: 14
+        labelAlignment: center:bottom
+      4:
+        type: empty
+      5:
+        type: nav
+        goto: "@back"
+        label: ◀
+      6:
+        type: empty

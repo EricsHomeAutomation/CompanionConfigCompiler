@@ -1,0 +1,20 @@
+# Companion Config Project
+# Generated from CompanionPi_2026-03-22-2311_custom_config.companionconfig
+
+connections:
+  homeassistant-server:
+    type: homeassistant-server
+    url: http://10.0.0.120:8123
+    accessToken: !secret homeassistant_access_token
+    ignoreCertificates: true
+templates:
+  # back_button:
+  #   type: nav
+  #   goto: "@back"
+  #   label: ◀
+  next_button:
+    type: nav
+    label: ▶
+
+include:
+  - hot-tub-outside.panel.yaml
