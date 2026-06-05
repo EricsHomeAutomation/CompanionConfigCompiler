@@ -12,7 +12,9 @@
     "watch": "tsc --watch",
     "start": "node dist/cli.js",
     "test": "vitest",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "compile": "echo \"Specify a shortcut to compile a specific config.\n - npm run compile:home\"",
+    "compile:home": "node dist/cli.js build examples/home"
   },
   "keywords": [
     "bitfocus",
