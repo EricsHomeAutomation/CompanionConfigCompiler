@@ -8,10 +8,10 @@ connections:
     accessToken: !secret homeassistant_access_token
     ignoreCertificates: true
 templates:
-  # back_button:
-  #   type: nav
-  #   goto: "@back"
-  #   label: ◀
+  back_button:
+    type: nav
+    goto: "@back"
+    label: ◀
   next_button:
     type: nav
     label: ▶

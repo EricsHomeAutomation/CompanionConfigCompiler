@@ -64,8 +64,7 @@ panel:
       4:
         type: empty
       5:
-        type: nav
-        goto: "@back"
-        label: ◀
+        type: template
+        template: back_button
       6:
         type: empty
