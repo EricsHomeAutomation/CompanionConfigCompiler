@@ -12,12 +12,13 @@
 import { Command } from "commander";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadProject } from "./parser/index.js";
 import { emit, serializeConfig } from "./emitter/index.js";
 import { createImageLoader, mergeProject } from "./utils/index.js";
 import { validatePageReferences, allocatePages } from "./allocator/index.js";
 
-const program = new Command();
+export const program = new Command();
 
 const PROJECT_CANDIDATES = [
   "companion.yaml",
@@ -292,4 +293,9 @@ program
     }
   });
 
-program.parse();
+// Only parse CLI args when this file is executed directly, not when imported by tests.
+const cliFilePath = fileURLToPath(import.meta.url);
+const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : "";
+if (invokedPath && invokedPath === cliFilePath) {
+  program.parse();
+}
